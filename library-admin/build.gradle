@@ -1,0 +1,55 @@
+group 'library'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext {
+        springBootVersion = '1.5.6.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://plugins.gradle.org/m2/' }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: "io.spring.dependency-management"
+
+
+version '1.0-SNAPSHOT'
+//java plugin可以设置的属性
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+}
+
+dependencies {
+    compile(project(":library-domain"))
+    compile 'com.alibaba:fastjson:1.2.37'
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.3'
+    compile group: 'commons-codec', name: 'commons-codec', version: '1.10'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.6'
+    compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
+    compile group: 'commons-io', name: 'commons-io', version: '2.5'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    compile 'net.sourceforge.nekohtml:nekohtml:1.9.22'
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+configurations {
+    providedRuntime
+}
+
+springBoot {
+    executable = true
+}
