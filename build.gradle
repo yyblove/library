@@ -1,14 +1,30 @@
 group 'library'
 version '1.0-SNAPSHOT'
 
-apply plugin: 'java'
-
-sourceCompatibility = 1.8
-
-repositories {
-    mavenCentral()
+ext {
+    profile = "release"
 }
 
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+//将以下属性应用到所有子模块,gradle约定用目录名称匹配子模块
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'maven'
+
+    repositories {
+        mavenLocal()
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+        maven { url "http://maven.fszs.me:8081/repositories/snapshots" }
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "http://repo.spring.io/milestone" }
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+    }
+
+    //java plugin可以设置的属性
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+
 }
