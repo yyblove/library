@@ -22,13 +22,12 @@ apply plugin: 'org.springframework.boot'
 apply plugin: "io.spring.dependency-management"
 
 
-version '1.0-SNAPSHOT'
 //java plugin可以设置的属性
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
-    mavenCentral()
+    mavenLocal()
     maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
 }
 
@@ -41,9 +40,13 @@ dependencies {
     compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
     compile group: 'commons-io', name: 'commons-io', version: '2.5'
     compile 'org.springframework.boot:spring-boot-starter-web'
-    compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    //compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
     compile 'net.sourceforge.nekohtml:nekohtml:1.9.22'
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    //jsp
+    compile 'org.springframework.boot:spring-boot-starter-tomcat'
+    compile 'org.apache.tomcat.embed:tomcat-embed-jasper'
+    compile 'javax.servlet:jstl'
 }
 
 configurations {

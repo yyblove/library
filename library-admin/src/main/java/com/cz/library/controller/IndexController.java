@@ -12,8 +12,12 @@ public class IndexController {
 
 
     @GetMapping("")
-    public ModelAndView index(){
-        return new ModelAndView("index");
+    public ModelAndView index() {
+        ModelAndView view = new ModelAndView("index");
+        view.addObject("title", "hello");
+        view.addObject("content", "nihao");
+
+        return view;
     }
 
 }
