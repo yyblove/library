@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thymeleaf.library.mybatis.ReaderMapper" >
+  <resultMap id="BaseResultMap" type="com.thymeleaf.library.mybatis.Reader" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="barcode" property="barcode" jdbcType="VARCHAR" />
+    <result column="vocation" property="vocation" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="paperType" property="papertype" jdbcType="VARCHAR" />
+    <result column="paperNO" property="paperno" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="createDate" property="createdate" jdbcType="DATE" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="typeid" property="typeid" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_reader
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.thymeleaf.library.mybatis.Reader" >
+    insert into tb_reader (id, name, sex, 
+      barcode, vocation, birthday, 
+      paperType, paperNO, tel, 
+      email, createDate, operator, 
+      typeid, remark)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{barcode,jdbcType=VARCHAR}, #{vocation,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, 
+      #{papertype,jdbcType=VARCHAR}, #{paperno,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{createdate,jdbcType=DATE}, #{operator,jdbcType=VARCHAR}, 
+      #{typeid,jdbcType=INTEGER}, #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.thymeleaf.library.mybatis.Reader" >
+    update tb_reader
+    set name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      barcode = #{barcode,jdbcType=VARCHAR},
+      vocation = #{vocation,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      paperType = #{papertype,jdbcType=VARCHAR},
+      paperNO = #{paperno,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      createDate = #{createdate,jdbcType=DATE},
+      operator = #{operator,jdbcType=VARCHAR},
+      typeid = #{typeid,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, name, sex, barcode, vocation, birthday, paperType, paperNO, tel, email, 
+    createDate, operator, typeid, remark
+    from tb_reader
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, name, sex, barcode, vocation, birthday, paperType, paperNO, tel, email, 
+    createDate, operator, typeid, remark
+    from tb_reader
+  </select>
+</mapper>

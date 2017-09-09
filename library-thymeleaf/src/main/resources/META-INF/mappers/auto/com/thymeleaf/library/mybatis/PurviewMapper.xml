@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thymeleaf.library.mybatis.PurviewMapper" >
+  <resultMap id="BaseResultMap" type="com.thymeleaf.library.mybatis.Purview" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="sysset" property="sysset" jdbcType="BIT" />
+    <result column="readerset" property="readerset" jdbcType="BIT" />
+    <result column="bookset" property="bookset" jdbcType="BIT" />
+    <result column="borrowback" property="borrowback" jdbcType="BIT" />
+    <result column="sysquery" property="sysquery" jdbcType="BIT" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_purview
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.thymeleaf.library.mybatis.Purview" >
+    insert into tb_purview (id, sysset, readerset, 
+      bookset, borrowback, sysquery)
+    values (#{id,jdbcType=INTEGER}, #{sysset,jdbcType=BIT}, #{readerset,jdbcType=BIT}, 
+      #{bookset,jdbcType=BIT}, #{borrowback,jdbcType=BIT}, #{sysquery,jdbcType=BIT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.thymeleaf.library.mybatis.Purview" >
+    update tb_purview
+    set sysset = #{sysset,jdbcType=BIT},
+      readerset = #{readerset,jdbcType=BIT},
+      bookset = #{bookset,jdbcType=BIT},
+      borrowback = #{borrowback,jdbcType=BIT},
+      sysquery = #{sysquery,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, sysset, readerset, bookset, borrowback, sysquery
+    from tb_purview
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, sysset, readerset, bookset, borrowback, sysquery
+    from tb_purview
+  </select>
+</mapper>

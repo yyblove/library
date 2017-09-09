@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thymeleaf.library.mybatis.BorrowMapper" >
+  <resultMap id="BaseResultMap" type="com.thymeleaf.library.mybatis.Borrow" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="readerid" property="readerid" jdbcType="INTEGER" />
+    <result column="bookid" property="bookid" jdbcType="INTEGER" />
+    <result column="borrowTime" property="borrowtime" jdbcType="DATE" />
+    <result column="backTime" property="backtime" jdbcType="DATE" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="ifback" property="ifback" jdbcType="BIT" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_borrow
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.thymeleaf.library.mybatis.Borrow" >
+    insert into tb_borrow (id, readerid, bookid, 
+      borrowTime, backTime, operator, 
+      ifback)
+    values (#{id,jdbcType=INTEGER}, #{readerid,jdbcType=INTEGER}, #{bookid,jdbcType=INTEGER}, 
+      #{borrowtime,jdbcType=DATE}, #{backtime,jdbcType=DATE}, #{operator,jdbcType=VARCHAR}, 
+      #{ifback,jdbcType=BIT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.thymeleaf.library.mybatis.Borrow" >
+    update tb_borrow
+    set readerid = #{readerid,jdbcType=INTEGER},
+      bookid = #{bookid,jdbcType=INTEGER},
+      borrowTime = #{borrowtime,jdbcType=DATE},
+      backTime = #{backtime,jdbcType=DATE},
+      operator = #{operator,jdbcType=VARCHAR},
+      ifback = #{ifback,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, readerid, bookid, borrowTime, backTime, operator, ifback
+    from tb_borrow
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, readerid, bookid, borrowTime, backTime, operator, ifback
+    from tb_borrow
+  </select>
+</mapper>

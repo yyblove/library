@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thymeleaf.library.mybatis.PublishingMapper" >
+  <resultMap id="BaseResultMap" type="com.thymeleaf.library.mybatis.Publishing" >
+    <result column="ISBN" property="isbn" jdbcType="VARCHAR" />
+    <result column="pubname" property="pubname" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.thymeleaf.library.mybatis.Publishing" >
+    insert into tb_publishing (ISBN, pubname)
+    values (#{isbn,jdbcType=VARCHAR}, #{pubname,jdbcType=VARCHAR})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ISBN, pubname
+    from tb_publishing
+  </select>
+</mapper>

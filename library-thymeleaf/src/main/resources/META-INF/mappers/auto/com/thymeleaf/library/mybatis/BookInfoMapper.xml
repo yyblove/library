@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thymeleaf.library.mybatis.BookInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.thymeleaf.library.mybatis.BookInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="barcode" property="barcode" jdbcType="VARCHAR" />
+    <result column="bookname" property="bookname" jdbcType="VARCHAR" />
+    <result column="typeid" property="typeid" jdbcType="INTEGER" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="translator" property="translator" jdbcType="VARCHAR" />
+    <result column="ISBN" property="isbn" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="REAL" />
+    <result column="page" property="page" jdbcType="INTEGER" />
+    <result column="bookcase" property="bookcase" jdbcType="INTEGER" />
+    <result column="storage" property="storage" jdbcType="INTEGER" />
+    <result column="inTime" property="intime" jdbcType="DATE" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="del" property="del" jdbcType="BIT" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_bookinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.thymeleaf.library.mybatis.BookInfo" >
+    insert into tb_bookinfo (id, barcode, bookname, 
+      typeid, author, translator, 
+      ISBN, price, page, bookcase, 
+      storage, inTime, operator, 
+      del)
+    values (#{id,jdbcType=INTEGER}, #{barcode,jdbcType=VARCHAR}, #{bookname,jdbcType=VARCHAR}, 
+      #{typeid,jdbcType=INTEGER}, #{author,jdbcType=VARCHAR}, #{translator,jdbcType=VARCHAR}, 
+      #{isbn,jdbcType=VARCHAR}, #{price,jdbcType=REAL}, #{page,jdbcType=INTEGER}, #{bookcase,jdbcType=INTEGER}, 
+      #{storage,jdbcType=INTEGER}, #{intime,jdbcType=DATE}, #{operator,jdbcType=VARCHAR}, 
+      #{del,jdbcType=BIT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.thymeleaf.library.mybatis.BookInfo" >
+    update tb_bookinfo
+    set barcode = #{barcode,jdbcType=VARCHAR},
+      bookname = #{bookname,jdbcType=VARCHAR},
+      typeid = #{typeid,jdbcType=INTEGER},
+      author = #{author,jdbcType=VARCHAR},
+      translator = #{translator,jdbcType=VARCHAR},
+      ISBN = #{isbn,jdbcType=VARCHAR},
+      price = #{price,jdbcType=REAL},
+      page = #{page,jdbcType=INTEGER},
+      bookcase = #{bookcase,jdbcType=INTEGER},
+      storage = #{storage,jdbcType=INTEGER},
+      inTime = #{intime,jdbcType=DATE},
+      operator = #{operator,jdbcType=VARCHAR},
+      del = #{del,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, barcode, bookname, typeid, author, translator, ISBN, price, page, bookcase, 
+    storage, inTime, operator, del
+    from tb_bookinfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, barcode, bookname, typeid, author, translator, ISBN, price, page, bookcase, 
+    storage, inTime, operator, del
+    from tb_bookinfo
+  </select>
+</mapper>

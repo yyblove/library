@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thymeleaf.library.mybatis.ParameterMapper" >
+  <resultMap id="BaseResultMap" type="com.thymeleaf.library.mybatis.Parameter" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="cost" property="cost" jdbcType="INTEGER" />
+    <result column="validity" property="validity" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_parameter
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.thymeleaf.library.mybatis.Parameter" >
+    insert into tb_parameter (id, cost, validity
+      )
+    values (#{id,jdbcType=INTEGER}, #{cost,jdbcType=INTEGER}, #{validity,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.thymeleaf.library.mybatis.Parameter" >
+    update tb_parameter
+    set cost = #{cost,jdbcType=INTEGER},
+      validity = #{validity,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, cost, validity
+    from tb_parameter
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, cost, validity
+    from tb_parameter
+  </select>
+</mapper>

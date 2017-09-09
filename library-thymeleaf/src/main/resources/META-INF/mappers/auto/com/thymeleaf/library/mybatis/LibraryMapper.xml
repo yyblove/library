@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thymeleaf.library.mybatis.LibraryMapper" >
+  <resultMap id="BaseResultMap" type="com.thymeleaf.library.mybatis.Library" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="libraryname" property="libraryname" jdbcType="VARCHAR" />
+    <result column="curator" property="curator" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="createDate" property="createdate" jdbcType="DATE" />
+    <result column="introduce" property="introduce" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_library
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.thymeleaf.library.mybatis.Library" >
+    insert into tb_library (id, libraryname, curator, 
+      tel, address, email, 
+      url, createDate, introduce
+      )
+    values (#{id,jdbcType=INTEGER}, #{libraryname,jdbcType=VARCHAR}, #{curator,jdbcType=VARCHAR}, 
+      #{tel,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{createdate,jdbcType=DATE}, #{introduce,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.thymeleaf.library.mybatis.Library" >
+    update tb_library
+    set libraryname = #{libraryname,jdbcType=VARCHAR},
+      curator = #{curator,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      createDate = #{createdate,jdbcType=DATE},
+      introduce = #{introduce,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, libraryname, curator, tel, address, email, url, createDate, introduce
+    from tb_library
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, libraryname, curator, tel, address, email, url, createDate, introduce
+    from tb_library
+  </select>
+</mapper>
