@@ -39,7 +39,37 @@
                              targetProject="${target.model.java.project}">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
-        <table tableName="test" domainObjectName="Test">
+        <table tableName="tb_bookcase" domainObjectName="Bookcase">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <table tableName="tb_bookinfo" domainObjectName="BookInfo">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <table tableName="tb_booktype" domainObjectName="BookType">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <table tableName="tb_borrow" domainObjectName="Borrow">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <table tableName="tb_library" domainObjectName="Library">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <table tableName="tb_manager" domainObjectName="Manager">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <table tableName="tb_parameter" domainObjectName="Parameter">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <table tableName="tb_publishing" domainObjectName="Publishing">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <table tableName="tb_purview" domainObjectName="Purview">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <table tableName="tb_reader" domainObjectName="Reader">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <table tableName="tb_readertype" domainObjectName="ReaderType">
             <property name="useActualColumnNames" value="false"/>
         </table>
     </context>
