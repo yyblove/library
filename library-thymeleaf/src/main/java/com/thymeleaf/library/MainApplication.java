@@ -25,9 +25,9 @@ public class MainApplication {
 
         @Override
         public void addInterceptors(InterceptorRegistry registry) {
-            // if (webInterceptor != null){
-            //     registry.addInterceptor(webInterceptor).addPathPatterns("/**").excludePathPatterns("/login");
-            // }
+            if (webInterceptor != null){
+                registry.addInterceptor(webInterceptor).addPathPatterns("/**").excludePathPatterns("/login");
+            }
             super.addInterceptors(registry);
         }
     }

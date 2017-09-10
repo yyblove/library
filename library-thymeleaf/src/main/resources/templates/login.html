@@ -1,101 +1,64 @@
 <!DOCTYPE html>
-<html lang="zh-cmn-Hans" xmlns:th="http://www.thymeleaf.org">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="index::header" th:with="title='library - login'">
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Type" content="application/x-www-form-urlencoded;charset=UTF-8">
-    <title>Library - login</title>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
-    <link ref="stylesheet" th:href="@{/css/main.css}">
-    <style type="text/css">
-        .container {
-            width: 300px;
-            padding: 200px 0;
-        }
-
-        .input-group {
-            width: 100%;
-            padding: 0px 25px;
-            margin-top: 20px;
-        }
-
-        .input-group-addon {
-            width: 80px;
-        }
-
-        .btn-group {
-            margin-top: 20px;
-            margin-right: 25px;
-            position: relative;
-            float: right;
-        }
-
-        .error{
-            text-align: right;
-            font-size: 14px;
-            color: red;
-            margin-top: 5px;
-        }
-
-        .footer {
-            position: absolute;
-            bottom: 0;
-            right: 200px;
-            padding-bottom: 100px;
-        }
-    </style>
+    <title>Title</title>
 </head>
+<body class="bg-slate-800">
+<!-- Page container -->
+<div class="page-container login-container">
 
-<body>
-<div class="container">
-    <div th:include="index::copy"></div>
-    <form th:object="${user}" th:action="@{/login}" th:method="POST">
+    <!-- Page content -->
+    <div class="page-content">
 
-        <div class="input-group">
-            <span class="input-group-addon text-justify" id="username-addon">用户名</span>
-            <input type="text" th:field="*{username}" value="" th:value="*{username}" class="form-control"
-                   placeholder="用户名" aria-describedby="basic-addon" id="username">
+        <!-- Main content -->
+        <div class="content-wrapper">
+
+            <!-- Simple login form -->
+            <form th:action="@{/login}" method="post" th:object="${user}">
+                <div class="panel panel-body login-form">
+                    <div class="text-center">
+                        <div class="icon-object border-slate-300 text-slate-300"><i class="icon-reading"></i></div>
+                        <h5 class="content-group">Login to your account <small class="display-block">Enter your credentials below</small></h5>
+                    </div>
+
+                    <div class="form-group has-feedback has-feedback-left">
+                        <input type="text" class="form-control" placeholder="Username" th:field="*{username}">
+                        <div class="form-control-feedback">
+                            <i class="icon-user text-muted"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group has-feedback has-feedback-left">
+                        <input type="password" class="form-control" placeholder="Password" th:field="*{password}">
+                        <div class="form-control-feedback">
+                            <i class="icon-lock2 text-muted"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group has-feedback has-feedback-left">
+                        <span class="help-block text-danger" th:unless="${msg.success}" th:utext ="'<i class=\'icon-cancel-circle2 position-left\'></i>' + ${msg.msg}"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">Sign in <i class="icon-circle-right2 position-right"></i></button>
+                    </div>
+
+                </div>
+            </form>
+            <!-- /simple login form -->
+
+            <!-- Footer -->
+            <div class="footer text-white">
+                &copy; 2015. <a href="#" class="text-white">Limitless Web App Kit</a> by <a href="http://themeforest.net/user/Kopyov" class="text-white" target="_blank">Eugene Kopyov</a>
+            </div>
+            <!-- /footer -->
+
         </div>
-        <div class="input-group">
-            <span class="input-group-addon text-justify" id="password-addon">密 码</span>
-            <input type="password" th:field="*{password}" th:value="${user.password}" class="form-control"
-                   placeholder="密码" aria-describedby="password-addon" id="password">
-        </div>
-        <div class="input-group error">
-            <p th:if="!${msg.success}" th:text="${msg.msg}">标题长度必须在2-30之间</p>
-        </div>
-        <div class="btn-group">
-            <input class="btn  btn-info" type="submit" id="loginBtn1" value="确定">
-        </div>
-    </form>
+
+    </div>
+
 </div>
 
-<script th:src="@{/js/jquery-3.2.1.min.js}" type="text/javascript"></script>
-<script th:inline="javascript" type="text/javascript">
-    $('#loginBtn').click(function () {
-        var user = {};
-        user.id = "";
-        user.username = $('#username').val();
-        user.password = $('#password').val();
-        var data = JSON.stringify({user: user});
-        console.log(data);
-        $.ajax({
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            type: "POST",
-            url: "/login",
-            contentType: "application/json; charset=utf-8",
-            data: data,
-            dataType: "json",
-            success: function (res) {
-                alert(res);
-            },
-            error: function (res) {
-                alert(res);
-            }
-        });
-    });
-</script>
 </body>
 </html>

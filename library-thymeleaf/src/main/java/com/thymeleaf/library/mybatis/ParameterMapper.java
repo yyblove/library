@@ -1,8 +1,10 @@
 package com.thymeleaf.library.mybatis;
 
-import com.thymeleaf.library.mybatis.Parameter;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
+@Component
 public interface ParameterMapper {
     int deleteByPrimaryKey(Integer id);
 

@@ -2,25 +2,33 @@ package com.thymeleaf.library.vo;
 
 import org.springframework.web.servlet.ModelAndView;
 
-public class MyModeView extends ModelAndView{
+public class MyModeView extends ModelAndView {
+
+    public MyModeView(String view, Object content) {
+        super("index");
+        super.addObject("view", view);
+        super.addObject("content", content);
+    }
+
+    public MyModeView(String view) {
+        this(view, null);
+    }
 
     public MyModeView(){
-        this(null, null, null);
+        this("index");
     }
 
-    public MyModeView(String view){
-       this(view, null, null);
+    public void setContent(Object content) {
+        super.addObject("content", content);
     }
 
-    public MyModeView(String view, String title){
-        this(view, title, null);
-    }
-
-    public MyModeView(String view, String title, String username){
-        super(view);
-    }
-
-    public void setMsg(Msg msg) {
+    public void setMsg(Msg msg){
         super.addObject("msg", msg);
     }
+
+    public void setView(String view){
+        super.addObject("view", view);
+    }
+
+
 }

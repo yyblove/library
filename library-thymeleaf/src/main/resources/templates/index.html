@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:fragment="header">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>library - admin</title>
+    <title th:text="${title}">library - admin</title>
 
     <!-- Global stylesheets -->
     <link th:href="@{/assets/css/fonts.css}" rel="stylesheet" type="text/css">
@@ -86,16 +86,16 @@
                             <!-- Main -->
                             <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i>
                             </li>
-                            <li class="active"><a th:href="@{/index}"><i class="icon-home4"></i>
+                            <li><a th:href="@{/dashboard}"><i class="icon-home4"></i>
                                 <span>Dashboard</span></a>
                             </li>
-                            <li>
+                            <li id="test">
                                 <a href="#" ><i class="icon-stack2"></i> <span>系统设置</span></a>
                                 <ul>
                                     <li><a th:href="@{/library}">图书馆信息</a></li>
-                                    <li><a th:href="@{/index}">管理原设置</a></li>
-                                    <li><a th:href="@{/index}">参数设置</a></li>
-                                    <li><a th:href="@{/index}">书架设置</a></li>
+                                    <li><a th:href="@{/manager}">管理员设置</a></li>
+                                    <li><a th:href="@{/parameter}">参数设置</a></li>
+                                    <li><a th:href="@{/bookcase}">书架设置</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -135,8 +135,8 @@
 
                 <div class="breadcrumb-line">
                     <ul class="breadcrumb">
-                        <li><a href="index.html"><i class="icon-home2 position-left"></i> Home</a></li>
-                        <li class="active">Dashboard</li>
+                        <li><a th:href="@{/dashboard}"><i class="icon-home2 position-left"></i> Home</a></li>
+                        <li class="active" th:text="${view}"></li>
                     </ul>
                 </div>
             </div>
@@ -168,13 +168,18 @@
     </div>
     <!-- /page container -->
 </div>
-</body>
-<script type="javascript" th:inline="javascript">
-    var uri = [[${view}]];
-    console.log(uri);
-    $(function () {
-        $("li").removeClass("active");
-        $("[href=uri]").addClass("active");
+
+<script th:inline="javascript">
+    // 修改菜单激活状态
+    var uri = '/' + [[${view}]];
+    $('.active').removeClass('active');
+    $('.navigation').find('a').each(function () {
+        var href = $(this).attr('href');
+        console.log(href);
+        if(href == uri){
+            $(this).parent().addClass('active');
+        }
     });
 </script>
+</body>
 </html>

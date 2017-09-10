@@ -1,8 +1,10 @@
 package com.thymeleaf.library.mybatis;
 
-import com.thymeleaf.library.mybatis.Bookcase;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
+@Repository
 public interface BookcaseMapper {
     int deleteByPrimaryKey(Integer id);
 

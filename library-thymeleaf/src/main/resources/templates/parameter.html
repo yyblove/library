@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="content">
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h5 class="panel-title">参数设置</h5>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="collapse"></a></li>
+                    <!--<li><a data-action="reload"></a></li>-->
+                    <!--<li><a data-action="close"></a></li>-->
+                </ul>
+            </div>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" action="#">
+                <div class="form-group">
+                    <label class="control-label col-lg-2 text-right">办证费 (元)</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" th:value="${content.cost}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-2 text-right">有效期限 (月)</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" th:value="${content.validity}">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,8 +1,10 @@
 package com.thymeleaf.library.mybatis;
 
-import com.thymeleaf.library.mybatis.Manager;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
+@Component
 public interface ManagerMapper {
     int deleteByPrimaryKey(Integer id);
 

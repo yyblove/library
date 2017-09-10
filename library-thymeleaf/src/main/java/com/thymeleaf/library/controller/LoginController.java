@@ -4,19 +4,19 @@ import com.thymeleaf.library.biz.UserService;
 import com.thymeleaf.library.domain.User;
 import com.thymeleaf.library.mybatis.BookInfo;
 import com.thymeleaf.library.mybatis.BookInfoMapper;
-import com.thymeleaf.library.mybatis.Library;
-import com.thymeleaf.library.mybatis.LibraryMapper;
 import com.thymeleaf.library.vo.Msg;
-import com.thymeleaf.library.vo.MyModeView;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -32,20 +32,8 @@ public class LoginController {
     @Autowired
     BookInfoMapper bookInfoMapper;
 
-    @Autowired
-    LibraryMapper libraryMapper;
-
-    @GetMapping("/")
-    public void loading(@SessionAttribute(name = "username") String username, HttpServletResponse response) throws IOException {
-        if (StringUtils.isEmpty(username)) {
-            response.sendRedirect("/login");
-        } else {
-            response.sendRedirect("/index");
-        }
-    }
-
-    @GetMapping("/index")
-    public ModelAndView index() {
+    @GetMapping("/dashboard")
+    public ModelAndView dashboard() {
         ModelAndView view = new ModelAndView("index");
         view.addObject("view", "dashboard");
         List<BookInfo> list = bookInfoMapper.selectAll();
@@ -55,29 +43,26 @@ public class LoginController {
 
     @GetMapping("/login")
     public ModelAndView doGetLogin() {
-        MyModeView modeView = new MyModeView("login", "login");
-        modeView.addObject("user", new User());
-        return modeView;
+        ModelAndView view = new ModelAndView("login");
+        view.addObject("user", new User());
+        view.addObject("msg", new Msg(true, ""));
+        return view;
     }
 
     @PostMapping("/login")
-    public MyModeView doPostLogin(@ModelAttribute(value = "user") User user, MyModeView model) throws IOException {
+    public ModelAndView doPostLogin(@ModelAttribute(value = "user") User user, HttpServletRequest request) throws IOException {
+        ModelAndView model = new ModelAndView("login");
         if (userService.checkUser(user)) {
-            model.setViewName("redirect:/index");
+            HttpSession session = request.getSession(true);
+            session.setAttribute("userId", user.getId());
+            session.setAttribute("username", user.getUsername());
+            model.setViewName("redirect:/dashboard");
         } else {
             model.addObject("user", user);
-            model.setMsg(new Msg(false, "用户名或密码错误！！！"));
+            model.addObject("msg", new Msg(false, "用户名或密码错误！"));
         }
         return model;
-
     }
 
-    @GetMapping("/library")
-    public ModelAndView doGetLibrary(){
-        ModelAndView view = new ModelAndView("index");
-        view.addObject("view", "library");
-        Library library = libraryMapper.selectAll().get(0);
-        view.addObject("content", library);
-        return view;
-    }
+
 }
